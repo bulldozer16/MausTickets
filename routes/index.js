@@ -108,6 +108,30 @@ router.put('/events', function(req, res, next) {
 	res.json(req.body);
 });
 
+// Entradas adquiridas para evento A por sexo del cliente
+
+router.post('/transactions/tickets_genre', function(req, res, next) {
+	var name = req.body.name;
+	var query = Transaction.find( {'event':name }, {'tickets':1, 'genre':1} );
+
+	query.exec(function (err, r) {
+    	if (err) { return next(err); }
+
+	var dick = 0;
+	var pussy = 0;
+	for (var data of r)
+	{
+		if (data.genre) {dick += data.tickets;}
+		else {pussy += data.tickets;}
+	}
+
+	var response = {male:dick, female:pussy};
+	res.json(response);
+
+	});
+	
+});
+
 router.get('/transactions', function(req, res, next) {
 	Transaction.find(function(err, transactions) {
 		if (err) { return next(err); }
