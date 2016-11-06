@@ -16,7 +16,7 @@
       <option value="">---</option>
 </select></div>
 <div class="col-3" style="text-align: center font-size:24px; height:50px" ng-repeat="post in posts">
-  <br><span ng-click="decreaseUpvotes(post)"><</span>
+  <span ng-click="decreaseUpvotes(post)"><</span>
   - Entradas: {{post.upvotes}} -
   <span ng-click="incrementUpvotes(post)">></span>
 </div>
