@@ -6,10 +6,13 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/news');
+mongoose.connect('mongodb://localhost/maus_tickets');
 
 require('./models/Posts');
 require('./models/Comments');
+require('./models/Users');
+require('./models/Events');
+require('./models/Transactions');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
