@@ -132,6 +132,68 @@ router.post('/transactions/tickets_genre', function(req, res, next) {
 	
 });
 
+// Entradas adquiridas para evento A por provincia del cliente
+
+router.post('/transactions/tickets_province', function(req, res, next) {
+	var name = req.body.name;
+	var query = Transaction.find( {'event':name }, {'tickets':1, 'province':1} );
+
+	query.exec(function (err, r) {
+    	if (err) { return next(err); }
+
+	var San_Jose = 0;
+	var Alajuela = 0;
+	var Cartago = 0;
+	var Heredia = 0;
+	var Limon = 0;
+	var Guanacaste = 0;
+	var Puntarenas = 0;
+
+	for (var data of r)
+	{
+		if (data.province == "San Jose") {San_Jose += data.tickets;}
+		else if (data.province == "Alajuela") {Alajuela += data.tickets;}
+		else if (data.province == "Cartago") {Cartago += data.tickets;}
+		else if (data.province == "Heredia") {Heredia += data.tickets;}
+		else if (data.province == "Limon") {Limon += data.tickets;}
+		else if (data.province == "Guanacaste") {Guanacaste += data.tickets;}
+		else {Puntarenas += data.tickets;}
+	}
+
+	var response = {'San Jose':San_Jose, 
+			'Alajuela':Alajuela, 
+			'Cartago':Cartago,
+			'Heredia':Heredia,
+			'Limon':Limon,
+			'Guanacaste':Guanacaste,
+			'Puntarenas':Puntarenas};
+	res.json(response);
+
+	});
+});
+
+// Ventas por evento
+
+router.post('/transactions/sales', function(req, res, next) {
+	var name = req.body.name;
+	var query = Transaction.find( {'event':name }, {'tickets':1, 'ticket_price':1} );
+
+	query.exec(function (err, r) {
+    	if (err) { return next(err); }
+
+	var total_amount = 0;
+
+	for (var data of r)
+	{
+		total_amount += (data.tickets * data.ticket_price);
+	}
+
+	res.json(total_amount);
+
+	});
+	
+});
+
 router.get('/transactions', function(req, res, next) {
 	Transaction.find(function(err, transactions) {
 		if (err) { return next(err); }
