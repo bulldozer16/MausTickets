@@ -8,8 +8,6 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/maus_tickets');
 
-require('./models/Posts');
-require('./models/Comments');
 require('./models/Users');
 require('./models/Events');
 require('./models/Transactions');
