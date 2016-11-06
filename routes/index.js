@@ -69,12 +69,25 @@ router.post('/users', function(req, res, next) {
 });
 
 router.post('/users/login', function(req, res, next) {
-	var query = User.find( {'username':req.body.username, 'password':req.body.password}, {'password':1} ).count();
+	var query = User.find( {'username':req.body.username, 'password':req.body.password}, {'type':1} );//.count();
 
 	query.exec(function (err, user) {
     	if (err) { return next(err); }
     	
-    	res.json(user);
+	var u = 0;
+	
+	try 
+	{
+		if (user[0].type == "Admin") {u = 1;}
+		else if (user[0].type == "User") {u = 2;}
+		else {u = 0;}
+	} 
+	catch (err) 
+	{
+		u = 0;
+	}
+
+    	res.json(u);
   	});
 });
 
@@ -174,21 +187,86 @@ router.post('/transactions/tickets_province', function(req, res, next) {
 
 // Ventas por evento
 
-router.post('/transactions/sales', function(req, res, next) {
-	var name = req.body.name;
-	var query = Transaction.find( {'event':name }, {'tickets':1, 'ticket_price':1} );
+router.get('/transactions/sales_by_event', function(req, res, next) {
+	var query = Transaction.aggregate([{$group:{_id:{event:"$event"},
+						totalAmount:{$sum:{$multiply:["$ticket_price","$tickets"]}},}}]);
 
 	query.exec(function (err, r) {
     	if (err) { return next(err); }
 
-	var total_amount = 0;
+	var response = [];
 
 	for (var data of r)
 	{
-		total_amount += (data.tickets * data.ticket_price);
+		var row = {'event':data._id.event, 'sale':data.totalAmount};
+		response.push(row);
 	}
 
-	res.json(total_amount);
+
+	res.json(response);
+
+	});	
+});
+
+// Ventas por cliente
+
+router.get('/transactions/tickets_by_client', function(req, res, next) {
+	var query = Transaction.aggregate([{$group:{_id:{user:"$username"},
+      							tickets:{$sum:"$tickets"},}}]);
+
+	query.exec(function (err, r) {
+    	if (err) { return next(err); }
+
+	var response = [];
+
+	for (var data of r)
+	{
+		var row = {'username':data._id.user, 'tickets':data.tickets};
+		response.push(row);
+	}
+
+
+	res.json(response);
+
+	});	
+});
+
+// Ventas por provincia
+
+router.get('/transactions/sales_by_province', function(req, res, next) {
+	var query = Transaction.find( {}, {'tickets':1, 'ticket_price':1, 'province':1} );
+
+	query.exec(function (err, r) {
+    	if (err) { return next(err); }
+
+	var San_Jose = 0;
+	var Alajuela = 0;
+	var Cartago = 0;
+	var Heredia = 0;
+	var Limon = 0;
+	var Guanacaste = 0;
+	var Puntarenas = 0;
+
+	for (var data of r)
+	{
+		if (data.province == "San Jose") {San_Jose += (data.tickets * data.ticket_price);}
+		else if (data.province == "Alajuela") {Alajuela += (data.tickets * data.ticket_price);}
+		else if (data.province == "Cartago") {Cartago += (data.tickets * data.ticket_price);}
+		else if (data.province == "Heredia") {Heredia += (data.tickets * data.ticket_price);}
+		else if (data.province == "Limon") {Limon += (data.tickets * data.ticket_price);}
+		else if (data.province == "Guanacaste") {Guanacaste += (data.tickets * data.ticket_price);}
+		else {Puntarenas += (data.tickets * data.ticket_price);}
+	}
+
+	var response = {'San Jose':San_Jose, 
+			'Alajuela':Alajuela, 
+			'Cartago':Cartago,
+			'Heredia':Heredia,
+			'Limon':Limon,
+			'Guanacaste':Guanacaste,
+			'Puntarenas':Puntarenas};
+
+	res.json(response);
 
 	});
 	
