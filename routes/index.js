@@ -6,6 +6,22 @@ var User = mongoose.model('User');
 var Event = mongoose.model('Event');
 var Transaction = mongoose.model('Transaction');
 
+router.param('username', function(req, res, next, username) {
+	var query = User.find( {'username':username} );
+
+	query.exec(function (err, user) {
+    	if (err) { return next(err); }
+    	if (!user) { return next(new Error('Can\'t find user')); }
+
+    	req.user = user;
+    	return next();
+  	});
+});
+
+router.get('/users/:username', function(req, res) {
+  	res.json(req.user);
+});
+
 router.get('/users', function(req, res, next) {
 	User.find(function(err, users) {
 		if (err) { return next(err); }
