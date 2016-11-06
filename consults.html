@@ -24,13 +24,13 @@
 				</p>
 			</div>
 			<div class="row">
-				<p onClick="cantEntEvent()" class="col-3" class="button"> 
-					<input type="button" value="Cantidad de entradas para evento según sexo" /> 
+				<p ng-click="consulta1()" class="col-3" class="button"> 
+					<input type="button" value="Cantidad de entradas para evento segun sexo" /> 
 				</p>
 				<p onClick="cantEntEventASex()" class="col-4" class="button"> 
-					<input type="button" value="Cantidad de entradas para evento según provincia" /> 
+					<input type="button" value="Cantidad de entradas para evento segun provincia" /> 
 				</p>
-				<select class="col-3" onClick="loadEvents()" id="selectOpt1"> <!-- ng-model -->
+				<select class="col-3" onClick="loadEvents()" id="selectOpt1" ng-model="selected_event"> <!-- ng-model -->
 	      				<option selected="selected">-Evento</option>
 	      				<option ng-repeat="event in events">{{event.name}}</option>
 				</select>
@@ -51,6 +51,10 @@
     				<th>Monto Total</th>
     				<th>Cliente</th>
   			</tr>
+			<tr ng-repeat="r in result">
+				<td>{{r.male}}</td>
+				<td>{{r.female}}</td>
+			</tr>
 		</table> 
 		</div>
   	</body>
