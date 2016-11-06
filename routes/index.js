@@ -6,6 +6,12 @@ var User = mongoose.model('User');
 var Event = mongoose.model('Event');
 var Transaction = mongoose.model('Transaction');
 
+router.use(function(req, res, next) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  	next();
+});
+
 router.param('username', function(req, res, next, username) {
 	var query = User.find( {'username':username} );
 
