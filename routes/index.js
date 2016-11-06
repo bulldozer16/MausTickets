@@ -18,6 +18,37 @@ router.param('username', function(req, res, next, username) {
   	});
 });
 
+router.param('name', function(req, res, next, name) {
+	var query = Event.find( {'name':name} );
+
+	query.exec(function (err, event) {
+    	if (err) { return next(err); }
+    	if (!event) { return next(new Error('Can\'t find event')); }
+
+    	req.event = event;
+    	return next();
+  	});
+});
+
+router.put('/users', function(req, res, next) {
+	var query = User.update({'username':req.body.username}, 
+			{$set: {'type':req.body.type,
+				'username':req.body.username,
+				'password':req.body.password,
+				'name':req.body.name,
+				'last_name':req.body.last_name,
+				'genre':req.body.genre,
+				'province':req.body.province,
+				'canton':req.body.canton,
+				'card_number':req.body.card_number,
+				'expire_date':req.body.expire_date,
+				'age':req.body.age,
+				'artists':req.body.artists,
+				'teams':req.body.teams,
+				'picture':req.body.picture}}).exec();
+	res.json(req.body);
+});
+
 router.get('/users/:username', function(req, res) {
   	res.json(req.user);
 });
@@ -37,6 +68,20 @@ router.post('/users', function(req, res, next) {
   	});
 });
 
+router.post('/users/login', function(req, res, next) {
+	var query = User.find( {'username':req.body.username, 'password':req.body.password}, {'password':1} ).count();
+
+	query.exec(function (err, user) {
+    	if (err) { return next(err); }
+    	
+    	res.json(user);
+  	});
+});
+
+router.get('/events/:name', function(req, res) {
+  	res.json(req.user);
+});
+
 router.get('/events', function(req, res, next) {
 	Event.find(function(err, events) {
 		if (err) { return next(err); }
@@ -50,6 +95,17 @@ router.post('/events', function(req, res, next) {
 		if (err) { return next(err); }
     		res.json(event);
   	});
+});
+
+router.put('/events', function(req, res, next) {
+	var query = Event.update({'name':req.body.name}, 
+			{$set: {'name':req.body.name,
+				'province':req.body.province,
+				'available_tickets':req.body.available_tickets,
+				'description':req.body.description,
+				'sold_tickets':req.body.sold_tickets,
+				'ticket_price':req.body.ticket_price}}).exec();
+	res.json(req.body);
 });
 
 router.get('/transactions', function(req, res, next) {
