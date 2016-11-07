@@ -27,7 +27,7 @@
 				<p ng-click="consulta1()" class="col-3" class="button"> 
 					<input type="button" value="Cantidad de entradas para evento segun sexo" /> 
 				</p>
-				<p onClick="cantEntEventASex()" class="col-4" class="button"> 
+				<p ng-click="consulta2()" class="col-4" class="button"> 
 					<input type="button" value="Cantidad de entradas para evento segun provincia" /> 
 				</p>
 				<select class="col-3" onClick="loadEvents()" id="selectOpt1" ng-model="selected_event"> <!-- ng-model -->
@@ -39,23 +39,30 @@
 				<a href="admin.html" class="button">Volver</a>
 			</p>
 		</form>
-		<div class="row">
-		<div class="col-12">
+		<div class="row"></div>
+		<div class="col-12"></div>
 		<h2 style="text-align: center">Resultados de consultas</h2>
 		<table id="myTable" style="width:100%">
   			<tr>
-    				<th>Evento</th>
-    				<th>Cantidad de Entradas</th>
-    				<th>Sexo</th>
-    				<th>Provincia</th>
-    				<th>Monto Total</th>
-    				<th>Cliente</th>
+    				<th ng-repeat="t in title">{{t}}</th>
   			</tr>
-			<tr ng-repeat="r in result">
-				<td>{{r.male}}</td>
-				<td>{{r.female}}</td>
+			<tr ng-show="flag==1">
+				<td align="center">{{selected_event}}</td>
+				<td align="center">{{result.male}}</td>
+				<td align="center">{{result.female}}</td>
+			</tr>
+			<tr ng-show="flag==2">
+				<td align="center">{{selected_event}}</td>
+				<td align="center">{{result.San_Jose}}</td>
+				<td align="center">{{result.Alajuela}}</td>
+				<td align="center">{{result.Cartago}}</td>
+				<td align="center">{{result.Heredia}}</td>
+				<td align="center">{{result.Puntarenas}}</td>
+				<td align="center">{{result.Guanacaste}}</td>
+				<td align="center">{{result.Limon}}</td>
 			</tr>
 		</table> 
+
 		</div>
   	</body>
 </html>

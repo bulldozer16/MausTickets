@@ -1,6 +1,8 @@
 var app = angular.module("MausTickets", []);
 
 app.controller("consultas", function($scope, $http) {
+	$scope.flag = 0;
+	$scope.title = [];
 	$scope.selected_event = "";
 	$scope.result = [];
 	$scope.events = [];
@@ -14,7 +16,24 @@ app.controller("consultas", function($scope, $http) {
     	});
 
 	$scope.consulta1 = function () {
+		$scope.flag = 1;
+		$scope.title = ["Evento", "Masculino", "Femenino"];
 		$http.post("http://192.168.100.21:3000/transactions/tickets_genre", {
+            		name: $scope.selected_event
+        	})
+        	.success(function (data, status, headers, config) {
+			console.log(data);
+            		$scope.result = data;           
+        	})
+        	.error(function (data, status, headers, config) {
+            		console.log(error);
+        	});
+	}
+
+	$scope.consulta2 = function () {
+		$scope.flag = 2;
+		$scope.title = ["Evento", "San Jose", "Alajuela", "Cartago", "Heredia", "Puntarenas", "Guanacaste", "Limon"];
+		$http.post("http://192.168.100.21:3000/transactions/tickets_province", {
             		name: $scope.selected_event
         	})
         	.success(function (data, status, headers, config) {

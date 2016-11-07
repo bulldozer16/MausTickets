@@ -179,7 +179,7 @@ router.post('/transactions/tickets_province', function(req, res, next) {
 		else {Puntarenas += data.tickets;}
 	}
 
-	var response = {'San Jose':San_Jose, 
+	var response = {'San_Jose':San_Jose, 
 			'Alajuela':Alajuela, 
 			'Cartago':Cartago,
 			'Heredia':Heredia,
