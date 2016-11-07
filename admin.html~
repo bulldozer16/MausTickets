@@ -6,14 +6,14 @@
     <script src="js/toggle.js"></script>
     <link href="css/settings.css" rel="stylesheet">
   </head>
-  <body ng-app="flapperNews" ng-controller="RegisterEventCtrl" background="img/register.png">
-<form ng-submit="addEvent()">
+  <body ng-app="MausTickets" ng-controller="eventCtrl" background="img/register.png">
+<form">
 <div class="row">
   <div class="col-4" class="text"><input size=11 type="text" placeholder="Nombre de Evento" ng-model="eventname" style="font-size:24px; height:50px"></input></div>
-<div class="col-4" class="text"><input placeholder="Entradas Disponibles" ng-model="tickersNumber" style="font-size:24px; height:50px" type=text name=form_number1 size=11 maxlength=7 onkeypress='return isNumberKey(event)'></input></div>
-<div class="col-3" class="text"><input placeholder="Precio (Colones)" ng-model="tickersPrice" style="font-size:24px; height:50px" type=text name=form_number2 size=11 maxlength=7 onkeypress='return isNumberKey(event)'></input></div>
+<div class="col-4" class="text"><input placeholder="Entradas Disponibles" ng-model="ticketsNumber" style="font-size:24px; height:50px" type=text name=form_number1 size=11 maxlength=7 onkeypress='return isNumberKey(event)'></input></div>
+<div class="col-3" class="text"><input placeholder="Precio (Colones)" ng-model="ticketsPrice" style="font-size:24px; height:50px" type=text name=form_number2 size=11 maxlength=7 onkeypress='return isNumberKey(event)'></input></div>
 <div class="row">
-<div> <textarea class="col-12" rows="1" cols="50" placeholder="Descripcion del Evento">
+<div> <textarea ng-model="description" class="col-12" rows="1" cols="50" placeholder="Descripcion del Evento">
 </textarea> </div></div>
   
 </div>
@@ -45,8 +45,8 @@
 				<div class="panel-body"><div style="text-align: center">
 
 				
-				<p class="col-6"><a href="consults.html" class="button">Consultas</a></p>
-				<p class="col-6"><a href="index.html" class="button">Salir</a></p>
+				<p class="col-12"><a href="consults.html" class="button">Consultas</a></p>
+				<p class="col-12"><a href="index.html" class="button">Salir</a></p>
 
 </div>
   </body>

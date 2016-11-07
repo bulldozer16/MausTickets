@@ -3,23 +3,27 @@
     <title>Bienvenido a Maus Tickets</title>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
     <script src="js/controller.js"></script>
+<link href="css/settings.css" rel="stylesheet">
   </head>
-  <body ng-app="flapperNews" ng-controller="MainCtrl" background="img/tickets.jpg">
+  <body ng-app="MausTickets" ng-controller="loginCtrl" background="img/tickets.jpg">
 <div class="panel panel-default">
-				<div class="panel-body"><div style="text-align: center">
-<form ng-submit="loginForm(user)">
-  <input type="text" placeholder="Nombre de Usuario" ng-model="user.user" style="font-size:24px; height:50px"></input>
+				<div class="panel-body"><divc style="text-align: center">
+
+<form>
+  <input type="text" placeholder="Nombre de Usuario" ng-model="user" style="font-size:24px; height:50px"></input>
   <br>
-  <input type="password" placeholder="Clave" ng-model="user.pass" style="font-size:24px; height:50px"></input>
+  <input type="password" placeholder="Clave" ng-model="pass" style="font-size:24px; height:50px"></input>
   <br>
-  <p class="login button"> 
-					<input type="submit" value="Login" /> 
+<div class="row">
+<p ng-click="ingreso()" class="col-5" class="button"> 
+					<input type="button" value="Login" /> 
 				</p>
-				<p class="change_link">
+				<p class="col-4" style="color: white" class="change_link">
 					&#191Primera vez en nuestra p&#225gina?
 					<a href="register.html" class="to_register">Registrarse</a>
-				</p>
+				</p></div>
 </form>
+
 </div>
     <div>
       {{test}}
@@ -33,7 +37,7 @@
     {{post.title}}
   </span>
   - upvotes: {{post.upvotes}}
-</div>
+</divc>
 </div></div>
   </body>
 </html>

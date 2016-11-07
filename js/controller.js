@@ -1,116 +1,65 @@
-var app = angular.module('flapperNews', []);
+var app = angular.module("MausTickets", []);
 
-app.controller('MainCtrl',[
-'$http', '$scope',
-function($scope){
-$scope.posts = [
-  {title: 'Empty', upvotes: 0},
-];
+app.controller("eventCtrl", function($scope, $http) {
+	$scope.eventname = "";
+	//$scope.province = "";
+	$scope.ticketsNumber = 0;
+	$scope.description = "";
+	$scope.sold_tickets = 0;
+	$scope.ticketsPrice = 0;
 
-$scope.setPost = function(){
-  if($scope.title === '') { return; }
-  $scope.posts.push({
-    title: $scope.title,
-    upvotes: 0
-  });
-  $scope.title = '';
-};
+	$scope.addEvent = function () {
+		if ($scope.eventname && $scope.ticketsNumber && $scope.description && $scope.sold_tickets && $scope.ticketsPrice){
+			console.log("I AM HERE");
+			$http.post("http://192.168.100.21:3000/events", {
+		    		name: $scope.eventname,
+				province: "",
+				available_tickets: $scope.ticketsNumber,
+				description: $scope.description,
+				sold_tickets: 0,
+				ticket_price: $scope.ticketsPrice
+			})
+			.success(function (data, status, headers, config) {
+				console.log(data.description);        
+			})
+			.error(function (data, status, headers, config) {
+		    		window.alert("No se pudo ingresar el evento");
+			});
+		}
+		else{
+			window.alert("Debe rellenar la informacion solicitada");
+		}
+	}
+});
 
-$scope.incrementUpvotes = function(post) {
-  post.upvotes += 1;
-};
+app.controller("loginCtrl", function($scope, $http) {
+	$scope.username = "";
+	$scope.password = "";
+	$scope.state = -1;
 
-$scope.incrementUpvotes = function(post) {
-  post.upvotes += 1;
-};
-
-$scope.loginForm = function (user) {
-  if (user.user && user.pass) {
-  console.log("Iniciando sesin", user.user, user.pass);
-}
-else {
-  console.log("Iniciando sesian");}
-};
-
-}]);
-
-app.controller('loginCtrl', ['$scope', '$state', '$stateParams', 'HttpPost', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-            function ($scope, $state, $stateParams, HttpPost) {
-                console.log("Iniciando sesión");
-                $ionicSideMenuDelegate.canDragContent(false);
-                $scope.user = {};
-                $scope.loginForm = function (user) {
-                    if (user.user && user.pass) {
-                        console.log("Iniciando sesión");
-                        //$state.go("tabsController.rock");//BORRAR
-
-                        HttpPost.login(user, function (respuesta) {
-				console.log("respuesta?", respuesta);
-                            if (respuesta == true) {
-                                $scope.showPopup = function () {
-                                    var myPopup = $ionicPopup.show({
-                                        template: '<p class="text-center">Ingreso correcto</p>',
-                                        title: 'Bienvenido!',
-                                        scope: $scope
-
-                                    });
-                                    $timeout(function () {
-                                        myPopup.close(); //close the popup after 3 seconds for some reason
-                                    }, 2000);
-                                };
-                                $scope.showPopup();
-                                $ionicSideMenuDelegate.canDragContent(true);
-                                $state.go("tabsController.rock");
-
-                            } else {
-				$scope.showPopup = function () {
-                                    var myPopup = $ionicPopup.show({
-                                        template: '<p class="text-center">Ingreso correcto</p>',
-                                        title: 'Bienvenido!',
-                                        scope: $scope
-
-                                    });
-                                    $timeout(function () {
-                                        myPopup.close(); //close the popup after 3 seconds for some reason
-                                    }, 2000);
-                                };
-                                $scope.showPopup();
-                                $ionicSideMenuDelegate.canDragContent(true);
-                                $state.go("tabsController.rock");
-                                
-				//$state.go("tabsController.rock");
-                                //LIMPIAR FORMULARIO
-                            }
-
-                        }, function (err) {
-                            $scope.showErrorPopup = function () {
-                                    var myPopup = $ionicPopup.show({
-                                        template: '<p class="text-center">Usuario o contraseña incorrecto</p>',
-                                        title: 'Error',
-                                        scope: $scope
-
-                                    });
-                                    $timeout(function () {
-                                        myPopup.close(); //close the popup after 3 seconds for some reason
-                                    }, 2000);
-                                };
-                                $scope.showErrorPopup();
-
-                        });
-
-                    } else {
-                        $scope.showError3Popup = function () {
-                            var myPopup = $ionicPopup.show({
-                                template: '<p class="text-center">Por favor rellene todos los campos</p>',
-                                title: 'Error',
-                                scope: $scope
-
-                            });
-                            $timeout(function () {
-                                myPopup.close(); //close the popup after 3 seconds for some reason
-                            }, 2000);
-                        };
-                        $scope.showError3Popup();
-                    }
-                };
-            }]);
+	$scope.ingreso = function () {
+		if ($scope.user && $scope.pass){
+			console.log("I AM HERE");
+			$http.post("http://192.168.100.21:3000/users/login", {
+		    		username: $scope.user,
+				password: $scope.pass
+			})
+			.success(function (data, status, headers, config) {
+				console.log(data);
+		    		$scope.state = data;
+				if (data == 1)
+					window.location = "admin.html"; 
+				else if (data == 2)
+					window.location = "start.html"; 
+				else
+					window.alert("Nombre de usuario o clave incorrecta");         
+			})
+			.error(function (data, status, headers, config) {
+		    		window.alert("Debe rellenar la informacion solicitada");
+			});
+		}
+		else{
+			window.alert("Debe rellenar la informacion solicitada");
+		}
+	}
+});
