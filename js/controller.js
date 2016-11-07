@@ -120,6 +120,8 @@ app.controller("register", function($scope, $http) {
 	$scope.province = "";
 	$scope.canton = "";
 	$scope.age = "";
+	$scope.bands = "";
+	$scope.teams = "";
 
 	$scope.registrar = function() {
 		if ($scope.genre == "1") {$scope.genre = true;}
@@ -145,9 +147,11 @@ app.controller("register", function($scope, $http) {
         	})
         	.success(function (data, status, headers, config) {
 			console.log(data);
+			window.alert("Usuario registrado");
         	})
         	.error(function (data, status, headers, config) {
             		console.log(error);
+			window.alert("Error");
         	});
 	}
 });

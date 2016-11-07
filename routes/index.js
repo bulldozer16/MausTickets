@@ -36,7 +36,7 @@ router.param('name', function(req, res, next, name) {
   	});
 });
 
-router.put('/users', function(req, res, next) {
+router.post('/users/update', function(req, res, next) {
 	var query = User.update({'username':req.body.username}, 
 			{$set: {'type':req.body.type,
 				'username':req.body.username,

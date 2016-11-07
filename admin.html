@@ -34,7 +34,7 @@
 			<div class="row">
 				<div class="col-2">
 					<!--<select style="font-size:24px; height:50px" onClick="loadEvents()" id="selectOpt1">-->
-					<select onClick="loadEvents()" id="selectOpt1" ng-model="selected_event">
+					<select id="selectOpt1" ng-model="selected_event">
       						<option selected="selected">Evento</option>
       						<option value="">---</option>
 						<option ng-repeat="e in events" ng-click="set_shit(e)">{{e.name}}</option>
