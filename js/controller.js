@@ -154,9 +154,11 @@ app.controller("register", function($scope, $http) {
         	})
         	.success(function (data, status, headers, config) {
 			console.log(data);
+			window.alert("Usuario registrado");
         	})
         	.error(function (data, status, headers, config) {
             		console.log(error);
+			window.alert("Error");
         	});
 	}
 });
