@@ -264,7 +264,7 @@ router.get('/transactions/sales_by_province', function(req, res, next) {
 		else {Puntarenas += (data.tickets * data.ticket_price);}
 	}
 
-	var response = {'San Jose':San_Jose, 
+	var response = {'San_Jose':San_Jose, 
 			'Alajuela':Alajuela, 
 			'Cartago':Cartago,
 			'Heredia':Heredia,

@@ -10,16 +10,16 @@
   	<body ng-controller="consultas" background="img/register.png">
 		<form>
 			<div class="row">
-	   			<p class="col-2" class="button"> 
+	   			<p ng-click="consulta5()" class="col-2" class="button"> 
 					<input type="submit" value="Cant. entradas por evento" /> 
 				</p>
-				<p class="col-2" class="button"> 
-					<input type="submit" value="Monto total según evento" /> 
+				<p ng-click="consulta3()" class="col-2" class="button"> 
+					<input type="submit" value="Monto total segun evento" /> 
 				</p>
-				<p onClick="cantEntEvent()" class="col-3" class="button"> 
-					<input type="button" value="Monto total según provincia" /> 
+				<p ng-click="consulta4()" class="col-3" class="button"> 
+					<input type="button" value="Monto total segun provincia" /> 
 				</p>
-				<p onClick="cantEntEventASex()" class="col-3" class="button"> 
+				<p ng-click="consulta6()" class="col-3" class="button"> 
 					<input type="button" value="Cant. entradas por cliente" /> 
 				</p>
 			</div>
@@ -60,6 +60,46 @@
 				<td align="center">{{result.Puntarenas}}</td>
 				<td align="center">{{result.Guanacaste}}</td>
 				<td align="center">{{result.Limon}}</td>
+			</tr>
+			<tr ng-show="flag==3" ng-repeat="r in result">
+				<td align="center">{{r.event}}</td>
+				<td align="center">{{r.sale}}</td>
+			</tr>
+			<tr ng-show="flag==4">
+				<td align="center">San Jose</td>
+				<td align="center">{{result.San_Jose}}</td>
+			</tr>
+			<tr ng-show="flag==4">
+				<td align="center">Alajuela</td>
+				<td align="center">{{result.Alajuela}}</td>
+			</tr>
+			<tr ng-show="flag==4">
+				<td align="center">Cartago</td>
+				<td align="center">{{result.Cartago}}</td>
+			</tr>
+			<tr ng-show="flag==4">
+				<td align="center">Heredia</td>
+				<td align="center">{{result.Heredia}}</td>
+			</tr>
+			<tr ng-show="flag==4">
+				<td align="center">Puntarenas</td>
+				<td align="center">{{result.Puntarenas}}</td>
+			</tr>
+			<tr ng-show="flag==4">
+				<td align="center">Guanacaste</td>
+				<td align="center">{{result.Guanacaste}}</td>
+			</tr>
+			<tr ng-show="flag==4">
+				<td align="center">Limon</td>
+				<td align="center">{{result.Limon}}</td>
+			</tr>
+			<tr ng-show="flag==5" ng-repeat="r in result">
+				<td align="center">{{r.name}}</td>
+				<td align="center">{{r.sold_tickets}}</td>
+			</tr>
+			<tr ng-show="flag==6" ng-repeat="r in result">
+				<td align="center">{{r.username}}</td>
+				<td align="center">{{r.tickets}}</td>
 			</tr>
 		</table> 
 
