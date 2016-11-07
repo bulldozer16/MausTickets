@@ -1,33 +1,33 @@
 <html>
   <head>
-    <title>Registrarse a Maus Tickets</title>
+    <title>Perfil de Maus Tickets</title>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+    <!--script src="js/toogle.js"></script-->
     <script src="js/controller.js"></script>
-    <script src="js/toggle.js"></script>
     <link href="css/settings.css" rel="stylesheet">
   </head>
-  <body ng-app="flapperNews" ng-controller="RegisterCtrl" background="img/register.png">
-<form ng-submit="addUser()">
+  <body ng-app="MausTickets" ng-controller="profile" background="img/register.png">
+<form>
 <div class="row">
-  <div class="col-5" class="text"><input type="text" placeholder="Nombre de Usuario" ng-model="username" style="font-size:24px; height:50px"></input></div>
-  <div class="col-6" class="text"><input type="text" placeholder="Contrase&#241a" ng-model="password" style="font-size:24px; height:50px"></input></div>
-<div class="col-5" class="text"><input type="text" placeholder="Nombre" ng-model="name" style="font-size:24px; height:50px"></input></div>
-<div class="col-6" class="text">  <input type="text" placeholder="Apellidos" ng-model="lastname" style="font-size:24px; height:50px"></input></div>
+  <div class="col-5" class="text"><input id="un" type="text" placeholder="Nombre de Usuario" ng-model="username" style="font-size:24px; height:50px"></input></div>
+  <div class="col-6" class="text"><input id="up" type="text" placeholder="Contrase&#241a" ng-model="password" style="font-size:24px; height:50px"></input></div>
+<div class="col-5" class="text"><input id="n" type="text" placeholder="Nombre" ng-model="name" style="font-size:24px; height:50px"></input></div>
+<div class="col-6" class="text">  <input id="l" type="text" placeholder="Apellidos" ng-model="lastname" style="font-size:24px; height:50px"></input></div>
 <div class="col-9" style="text-align: center" class="sex-group">
   <label for="radio" class="sex-label">Sexo</label>
   <div class="controls">
 									<div name="radio" class="radio">
-									  <label style="font-size:24px; height:50px"><input type="radio" name="sexo" value="1" required> Masculino</label>
+									  <label style="font-size:24px; height:50px"><input id="h" type="radio" name="sexo" value="1" required> Masculino</label>
 									</div>
 									<div class="radio">
-									  <label style="font-size:24px; height:50px"><input type="radio" name="sexo" value="0" required> Femenino</label>
+									  <label style="font-size:24px; height:50px"><input id="m" type="radio" name="sexo" value="0" required> Femenino</label>
 									</div></div></div></div>
-<div class="col-5" class="text"><input placeholder="N&#250mero de Tarjeta de Cr&#233dito" ng-model="creditnumber" style="font-size:24px; height:50px" type=text name=form_number size=20 maxlength=12 onkeypress='return isNumberKey(event)'></input></div>
+<div class="col-5" class="text"><input id="ntc" placeholder="N&#250mero de Tarjeta de Cr&#233dito" ng-model="creditnumber" style="font-size:24px; height:50px" type=text name=form_number size=20 maxlength=12 onkeypress='return isNumberKey(event)'></input></div>
 <div class="col-6" class="expiration-group">
-  <label for="expiration-month" class="expiration-label">Fecha de Vencimiento</label>
+  <label for="expiration-month" class="expiration-label">Fecha de Vencimiento Vieja {{labelDate}}</label>
   <div class="controlsExp">
     <select name="expiration-month" id="expiration-month">
-      <option value="">Mes</option>
+      <option value="">Nuevo Mes</option>
       <option value="">-----</option>
       <option value="01">Enero</option>
       <option value="02">Febrero</option>
@@ -43,7 +43,7 @@
       <option value="12">Diciembre</option>
     </select>
     <select name="expiration-year" id="expiration-year">
-      <option value="">A&#241o</option>
+      <option value="">Nuevo A&#241o</option>
       <option value="">----</option>
 	<option value="2016">2016</option>
 	<option value="2017">2017</option>
@@ -64,7 +64,7 @@
   </div>
 </div>
   <br><div class="col-6" class="control-group">
-<label for="prov" class="prov-label">Lugar de Residencia</label><br>
+<label style="background-color: white" for="prov" class="prov-label">Lugar de Residencia/Canton {{labelCant}}</label><br>
 <select onChange="changePlace()" id="selectOpt1">
       <option value="" selected="selected">Provincia</option>
       <option value="">---</option>
@@ -160,8 +160,12 @@
     </select>
   </div>
 </div>
+<div class="row">
+			<textarea class="col-4" id="b" ng-model="bands" name="bands" placeholder="Bandas Favoritas" cols="40" rows="5"></textarea>
+			<textarea class="col-5" id="t" ng-model="teams" name="teams" placeholder="Equipos Favoritos" cols="40" rows="5"></textarea>
+			</div>
   <p class="col-6" class="login button"> 
-				<input type="submit" value="Registrarse" /> 
+				<input type="submit" value="Editar" /> 
 				</p>
 				<p class="col-6"><a href="start.html" class="button">Volver</a></p>
 </form>
