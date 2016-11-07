@@ -127,6 +127,8 @@ app.controller("register", function($scope, $http) {
 	$scope.province = "";
 	$scope.canton = "";
 	$scope.age = "";
+	$scope.bands = "";
+	$scope.teams = "";
 
 	$scope.registrar = function() {
 		if ($scope.genre == "1") {$scope.genre = true;}
@@ -162,10 +164,36 @@ app.controller("register", function($scope, $http) {
 app.controller("profile", function($scope, $http) {
 	console.log(localStorage.getItem('username'));
 	usuario = localStorage.getItem('username');
+
+	$scope.username = usuario;
+	$scope.password = "";
+	$scope.name = "";
+	$scope.last_name = "";
+	$scope.genre = true;
+	$scope.card_number = "";
+	$scope.expire_month = "";
+	$scope.expire_year = "";
+	$scope.province = "";
+	$scope.canton = "";
+	$scope.age = "";
+	$scope.bands = "";
+	$scope.teams = "";
+
 	$http.get("http://192.168.100.21:3000/users/"+ usuario)
         	.success(function (data, status, headers, config) { 
 			console.log("AQUI");
-			$scope.userdata = data;
+			$scope.password = data[0].password;
+			$scope.name = data[0].name;
+			$scope.last_name = data[0].last_name;
+			$scope.genre = data[0].genre;
+			$scope.card_number = data[0].card_number;
+			$scope.expire_month = "";
+			$scope.expire_year = "";
+			$scope.province = data[0].province;
+			$scope.canton = data[0].canton;
+			$scope.age = data[0].age;
+			$scope.bands = data[0].artists;
+			$scope.teams = data[0].teams; 
 			document.getElementById("un").value = data[0].username;
 			document.getElementById("up").value = data[0].password;
 			document.getElementById("n").value = data[0].name;
@@ -188,33 +216,20 @@ app.controller("profile", function($scope, $http) {
         	});
 
 	$scope.editar = function() {
-		if ($scope.genre == "1") {$scope.genre = true;}
-		else {$scope.genre = false};
-	
-		var expire = $scope.expire_month + "/" + $scope.expire_year;
-
-		$http.post("http://192.168.100.21:3000/users", {
-            		type: "User",
-			username: $scope.username,
-			password: $scope.password,
-			name: $scope.name,
-			last_name: $scope.last_name,
-			genre: $scope.genre,
-			province: $scope.province,
-			canton: $scope.canton,
-			card_number: $scope.card_number,
-			expire_date: expire,
-			age: $scope.age,
-			artists: $scope.bands,
-			teams: $scope.teams,
-			picture: ""
-        	})
-        	.success(function (data, status, headers, config) {
+		$http.post("http://192.168.100.21:3000/users/update", {
+			name: $scope.nombre,
+			available_tickets: $scope.entradas,
+			sold_tickets: $scope.vendidos,
+			ticket_price: $scope.precio,
+			description: $scope.descripcion
+		})
+		.success(function (data, status, headers, config) {
 			console.log(data);
-        	})
-        	.error(function (data, status, headers, config) {
-            		console.log(error);
-        	});
+			window.alert("Evento actualizado");
+		})
+		.error(function (data, status, headers, config) {
+	    		window.alert("Error");
+		});
 	}
 });
 
