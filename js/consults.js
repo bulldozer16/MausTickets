@@ -1,63 +1,6 @@
 var app = angular.module("MausTickets", []);
 
-app.controller("eventInfo", ['$scope', '$http', function($scope, $http) {
-	$scope.txt = [];
-	$scope.prize = 0;
-	$scope.loadEvent = function () {
-		$http.get("http://192.168.100.21:3000/events/"+ $scope.selected_event)
-        	.success(function (data, status, headers, config) {
-			//console.log(data[0].description);
-			//console.log("AQUI", $scope.selected_event);
-			$scope.txt = data;           
-        	})
-        	.error(function (data, status, headers, config) {
-            		console.log(error);
-        	});
-	}
-
-	$scope.setPrice = function () {
-		$http.get("http://192.168.100.21:3000/events/"+ $scope.selected_event)
-        	.success(function (data, status, headers, config) {
-			//console.log("AQUI", data[0].ticket_price * $scope.ticketsNumber, $scope.ticketsNumber);
-			$scope.prize = data[0].ticket_price * $scope.ticketsNumber;           
-        	})
-        	.error(function (data, status, headers, config) {
-            		console.log(error);
-        	});
-	}
-	
-	$scope.buy = function (){
-		$http.get("http://192.168.100.21:3000/events/"+ $scope.selected_event)
-        	.success(function (data, status, headers, config) {
-			//console.log("AQUI", data[0].ticket_price * $scope.ticketsNumber, $scope.ticketsNumber);
-//			$scope.prize = data[0].ticket_price * $scope.ticketsNumber;  
-			if (data[0].available_tickets < $scope.ticketsNumber){
-				window.alert("No existen suficientes disponibles para el evento seleccionado");
-			}
-			else{
-				
-			}         
-        	})
-        	.error(function (data, status, headers, config) {
-            		console.log(error);
-        	});
-	}	
-
-}]);
-
-/*app.controller('eventInfo', ['$scope', function ($scope, $http) {
-    
-    
-    $scope.loadEvent = function () {
-	$http.get("http://192.168.100.21:3000/events/"+ $scope.selected_event)
-        	.success(function (data, status, headers, config) { 
-			$scope.txt = data[0];         
-        	})
-        	.error(function (data, status, headers, config) {
-            		console.log(error);
-        	});
-    };
-}]);*/
+app.controller
 
 app.controller("consultas", function($scope, $http) {
 	$scope.flag = 0;
