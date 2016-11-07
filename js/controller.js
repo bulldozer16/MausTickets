@@ -10,7 +10,7 @@ app.controller("eventCtrl", function($scope, $http) {
 	$scope.ticketsPrice = 0;
 
 	$scope.addEvent = function () {
-		if ($scope.eventname && $scope.ticketsNumber && $scope.description && $scope.sold_tickets && $scope.ticketsPrice){
+		if ($scope.eventname && $scope.ticketsNumber && $scope.description && $scope.ticketsPrice){
 			console.log("I AM HERE");
 			$http.post("http://192.168.100.21:3000/events", {
 		    		name: $scope.eventname,
@@ -96,8 +96,8 @@ app.controller("register", function($scope, $http) {
 			card_number: $scope.card_number,
 			expire_date: expire,
 			age: $scope.age,
-			artists: "",
-			teams: "",
+			artists: $scope.bands,
+			teams: $scope.teams,
 			picture: ""
         	})
         	.success(function (data, status, headers, config) {
@@ -108,7 +108,3 @@ app.controller("register", function($scope, $http) {
         	});
 	}
 });
-<<<<<<< HEAD
-
-=======
->>>>>>> 5fc618c97097ac15709c8bc1dba8642b25667a7a

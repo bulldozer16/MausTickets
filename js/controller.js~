@@ -1,3 +1,4 @@
+
 var app = angular.module("MausTickets", []);
 
 app.controller("eventCtrl", function($scope, $http) {
@@ -10,6 +11,7 @@ app.controller("eventCtrl", function($scope, $http) {
 
 	$scope.addEvent = function () {
 		if ($scope.eventname && $scope.ticketsNumber && $scope.description && $scope.ticketsPrice){
+			console.log("I AM HERE");
 			$http.post("http://192.168.100.21:3000/events", {
 		    		name: $scope.eventname,
 				province: "",
@@ -23,28 +25,6 @@ app.controller("eventCtrl", function($scope, $http) {
 			})
 			.error(function (data, status, headers, config) {
 		    		window.alert("No se pudo ingresar el evento");
-			});
-		}
-		else{
-			window.alert("Debe rellenar la informacion solicitada");
-		}
-	}
-
-	$scope.editEvent = function () {
-		if ($scope.eventname && $scope.ticketsNumber && $scope.description && $scope.ticketsPrice){
-			console.log("I AM HERE");
-			$http.post("http://192.168.100.21:3000/events", {
-		    		name: $scope.eventnewname,
-				province: "",
-				available_tickets: $scope.ticketsNewNumber,
-				description: $scope.newdescription,
-				ticket_price: $scope.ticketsNewPrice
-			})
-			.success(function (data, status, headers, config) {
-				console.log(data.description);        
-			})
-			.error(function (data, status, headers, config) {
-		    		window.alert("No se pudo editar el evento");
 			});
 		}
 		else{

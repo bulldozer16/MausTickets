@@ -18,7 +18,7 @@
 <p ng-click="ingreso()" class="col-5" class="button"> 
 					<input type="button" value="Login" /> 
 				</p>
-				<p class="col-4" class="change_link">
+				<p class="col-4" style="color: white" class="change_link">
 					&#191Primera vez en nuestra p&#225gina?
 					<a href="register.html" class="to_register">Registrarse</a>
 				</p></div>
