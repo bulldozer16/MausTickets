@@ -98,7 +98,8 @@ router.post('/users/login', function(req, res, next) {
 });
 
 router.get('/events/:name', function(req, res) {
-  	res.json(req.user);
+  	res.json(req.event);
+
 });
 
 router.get('/events', function(req, res, next) {
