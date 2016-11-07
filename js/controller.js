@@ -180,6 +180,7 @@ app.controller("profile", function($scope, $http) {
 	$scope.age = "";
 	$scope.bands = "";
 	$scope.teams = "";
+	$scope.picture = "";
 
 	$http.get("http://192.168.100.21:3000/users/"+ usuario)
         	.success(function (data, status, headers, config) { 
@@ -195,7 +196,8 @@ app.controller("profile", function($scope, $http) {
 			$scope.canton = data[0].canton;
 			$scope.age = data[0].age;
 			$scope.bands = data[0].artists;
-			$scope.teams = data[0].teams; 
+			$scope.teams = data[0].teams;
+			$scope.picture = data[0].picture;
 			document.getElementById("un").value = data[0].username;
 			document.getElementById("up").value = data[0].password;
 			document.getElementById("n").value = data[0].name;
@@ -218,16 +220,38 @@ app.controller("profile", function($scope, $http) {
         	});
 
 	$scope.editar = function() {
+		
+		if ($scope.genre == "1") {$scope.genre = true;}
+		else {$scope.genre = false};
+		if ($scope.expire_month && $scope.expire_year)
+		    var expire = $scope.expire_month + "/" + $scope.expire_year;
+		else		
+		    var expire = $scope.labelDate;
+		console.log($scope.expire_month, $scope.expire_year);
+		if ($scope.canton != $scope.labelCant)
+		    var lugar = $scope.canton;
+		else		
+		    var lugar = $scope.labelCant;
+		console.log(lugar, expire, $scope.genre, $scope.username, $scope.password, $scope.name, $scope.last_name, $scope.province, $scope.card_number,$scope.age, $scope.bands, $scope.teams);
 		$http.post("http://192.168.100.21:3000/users/update", {
-			name: $scope.nombre,
-			available_tickets: $scope.entradas,
-			sold_tickets: $scope.vendidos,
-			ticket_price: $scope.precio,
-			description: $scope.descripcion
+			type: "User",
+			username: $scope.username,
+			password: $scope.password,
+			name: $scope.name,
+			last_name: $scope.last_name,
+			genre: $scope.genre,
+			province: $scope.province,
+			canton: lugar,
+			card_number: $scope.card_number,
+			expire_date: expire,
+			age: $scope.age,
+			artists: $scope.bands,
+			teams: $scope.teams,
+			picture: ""
 		})
 		.success(function (data, status, headers, config) {
 			console.log(data);
-			window.alert("Evento actualizado");
+			window.alert("Usuario actualizado");
 		})
 		.error(function (data, status, headers, config) {
 	    		window.alert("Error");
@@ -581,3 +605,10 @@ var opt = document.createElement('option');
                 list2.appendChild(opt);
               }
             }
+
+function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}

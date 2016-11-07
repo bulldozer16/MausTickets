@@ -7,9 +7,9 @@
     <link href="css/settings.css" rel="stylesheet">
   </head>
   <body ng-app="MausTickets" ng-controller="profile" background="img/register.png">
-<form>
+<form ng-submit="editar()">
 <div class="row">
-  <div class="col-5" class="text"><input id="un" type="text" placeholder="Nombre de Usuario" ng-model="username" style="font-size:24px; height:50px"></input></div>
+  <div class="col-5" class="text"><input id="un" disabled type="text" placeholder="Nombre de Usuario" ng-model="username" style="font-size:24px; height:50px"></input></div>
   <div class="col-6" class="text"><input id="up" type="text" placeholder="Contrase&#241a" ng-model="password" style="font-size:24px; height:50px"></input></div>
 <div class="col-5" class="text"><input id="n" type="text" placeholder="Nombre" ng-model="name" style="font-size:24px; height:50px"></input></div>
 <div class="col-6" class="text">  <input id="l" type="text" placeholder="Apellidos" ng-model="lastname" style="font-size:24px; height:50px"></input></div>
@@ -17,16 +17,16 @@
   <label for="radio" class="sex-label">Sexo</label>
   <div class="controls">
 									<div name="radio" class="radio">
-									  <label style="font-size:24px; height:50px"><input id="h" type="radio" name="sexo" value="1" required> Masculino</label>
+									  <label style="font-size:24px; height:50px"><input id="h" type="radio" ng-model="genre" name="sexo" value="1" required> Masculino</label>
 									</div>
 									<div class="radio">
-									  <label style="font-size:24px; height:50px"><input id="m" type="radio" name="sexo" value="0" required> Femenino</label>
+									  <label style="font-size:24px; height:50px"><input id="m" type="radio" ng-model="genre" name="sexo" value="0" required> Femenino</label>
 									</div></div></div></div>
-<div class="col-5" class="text"><input id="ntc" placeholder="N&#250mero de Tarjeta de Cr&#233dito" ng-model="creditnumber" style="font-size:24px; height:50px" type=text name=form_number size=20 maxlength=12 onkeypress='return isNumberKey(event)'></input></div>
+<div class="col-5" class="text"><input id="ntc" placeholder="N&#250mero de Tarjeta de Cr&#233dito" ng-model="card_number" style="font-size:24px; height:50px" type=text name=form_number size=20 maxlength=12 onkeypress='return isNumberKey(event)'></input></div>
 <div class="col-6" class="expiration-group">
   <label for="expiration-month" class="expiration-label">Fecha de Vencimiento {{labelDate}}</label>
   <div class="controlsExp">
-    <select name="expiration-month" id="expiration-month">
+    <select name="expiration-month" ng-model="expire_month" id="expiration-month">
       <option value="">Nuevo Mes</option>
       <option value="">-----</option>
       <option value="01">Enero</option>
@@ -42,7 +42,7 @@
       <option value="11">Noviembre</option>
       <option value="12">Diciembre</option>
     </select>
-    <select name="expiration-year" id="expiration-year">
+    <select name="expiration-year" ng-model="expire_year" id="expiration-year">
       <option value="">Nuevo A&#241o</option>
       <option value="">----</option>
 	<option value="2016">2016</option>
@@ -65,7 +65,7 @@
 </div>
   <br><div class="col-6" class="control-group">
 <label style="background-color: white" for="prov" class="prov-label">Lugar de Residencia/Canton {{labelCant}}</label><br>
-<select onChange="changePlace()" id="selectOpt1">
+<select ng-model="province" onChange="changePlace()" id="selectOpt1">
       <option value="" selected="selected">Provincia</option>
       <option value="">---</option>
       <option value="Alajuela">Alajuela</option>
@@ -76,13 +76,13 @@
       <option value="Guanacaste">Guanacaste</option>
       <option value="Limon">Limon</option>
 </select>
-        <select id="selectOpt2">
+        <select ng-model="canton" id="selectOpt2">
           <option value="">---</option>
         </select>
 </div>
 
  <div class="col-6" class="control-group">
-  <label for="dob-age" class="control-label">Edad</label>
+  <label ng-model="age" for="dob-age" class="control-label">Edad</label>
   <div class="controls">
     <select name="dob-age" id="dob-age">
       <option value="">Edad</option>
