@@ -30,7 +30,7 @@
 				<p ng-click="consulta2()" class="col-4" class="button"> 
 					<input type="button" value="Cantidad de entradas para evento segun provincia" /> 
 				</p>
-				<select class="col-3" onClick="loadEvents()" id="selectOpt1" ng-model="selected_event"> <!-- ng-model -->
+				<select class="col-3" id="selectOpt1" ng-model="selected_event"> <!-- ng-model -->
 	      				<option selected="selected">-Evento</option>
 	      				<option ng-repeat="event in events">{{event.name}}</option>
 				</select>

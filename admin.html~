@@ -18,8 +18,8 @@
   
 </div>
 <div class="row">
-  <p class="col-12" class="input button"> 
-				<input type="submit" value="Registrar Evento" /> 
+  <p class="col-12" ng-click="addEvent()" class="button"> 
+				<input type="submit"  value="Registrar Evento" /> 
 				</p></div>
 </form>
 <form ng-submit="editEvent()">

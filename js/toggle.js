@@ -12,6 +12,7 @@ function calculatePrice(evt){
     return true;
 }
 
+/*
 function loadEvents(){
               var list1 = document.getElementById("selectOpt1");
               var myselect = list1.options[list1.selectedIndex].value;
@@ -26,7 +27,7 @@ var opt = document.createElement('option');
                 opt.value = "Escazu";
                 opt.innerHTML = "Escazu";
                 list1.appendChild(opt);
-}
+}*/
 
 function changePlace(){
               var list1 = document.getElementById("selectOpt1");

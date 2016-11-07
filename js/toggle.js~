@@ -5,6 +5,30 @@ function isNumberKey(evt){
     return true;
 }
 
+function calculatePrice(evt){
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}
+
+var app = angular.module("MausTickets", []);
+
+app.controller("eventInfo", function($scope, $http) {
+	$scope.description = "";
+
+	$scope.loadEvent = function () {
+		$http.get("http://192.168.100.21:3000/events:"+ $scope.selected_event)
+        	.success(function (data, status, headers, config) {
+			console.log(data);
+            		$scope.result = data;           
+        	})
+        	.error(function (data, status, headers, config) {
+            		console.log(error);
+        	});
+	}
+});
+/*
 function loadEvents(){
               var list1 = document.getElementById("selectOpt1");
               var myselect = list1.options[list1.selectedIndex].value;
@@ -19,7 +43,7 @@ var opt = document.createElement('option');
                 opt.value = "Escazu";
                 opt.innerHTML = "Escazu";
                 list1.appendChild(opt);
-}
+}*/
 
 function changePlace(){
               var list1 = document.getElementById("selectOpt1");

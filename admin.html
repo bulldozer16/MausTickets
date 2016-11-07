@@ -29,15 +29,15 @@
       <option value="" selected="selected">Evento</option>
       <option value="">---</option>
 </select></div>
-  <div class="col-3" class="text"><input size=11 type="text" placeholder="Editar Nombre de Evento" ng-model="eventname" style="font-size:24px; height:50px"></input></div>
-<div class="col-3" class="text"><input placeholder="Editar N&#176 Entradas" ng-model="tickersNumber" style="font-size:24px; height:50px" type=text name=form_number size=11 maxlength=7 onkeypress='return isNumberKey(event)'></input></div>
-<div class="col-2" class="text"><input placeholder="Editar Precio" ng-model="tickersPrice" style="font-size:24px; height:50px" type=text name=form_number2 size=11 maxlength=7 onkeypress='return isNumberKey(event)'></input></div>
+  <div class="col-3" class="text"><input size=11 type="text" placeholder="Editar Nombre de Evento" ng-model="eventnewname" style="font-size:24px; height:50px"></input></div>
+<div class="col-3" class="text"><input placeholder="Editar N&#176 Entradas" ng-model="tickersNewNumber" style="font-size:24px; height:50px" type=text name=form_number size=11 maxlength=7 onkeypress='return isNumberKey(event)'></input></div>
+<div class="col-2" class="text"><input placeholder="Editar Precio" ng-model="ticketsNewPrice" style="font-size:24px; height:50px" type=text name=form_number2 size=11 maxlength=7 onkeypress='return isNumberKey(event)'></input></div>
 <div class="row">
-<div> <textarea class="col-12" rows="1" cols="50" placeholder="Editar Descripcion del Evento">
+<div> <textarea ng-model="newdescription" class="col-12" rows="1" cols="50" placeholder="Editar Descripcion del Evento">
 </textarea> </div></div>
   
 </div>
-  <p class="col-12" class="input button"> 
+  <p class="col-12" ng-click="editEvent()" class="button"> 
 				<input type="submit" value="Editar Evento" /> 
 				</p>
 </form>
