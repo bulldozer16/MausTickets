@@ -1,7 +1,5 @@
 var app = angular.module("MausTickets", []);
 
-app.controller
-
 app.controller("consultas", function($scope, $http) {
 	$scope.flag = 0;
 	$scope.title = [];

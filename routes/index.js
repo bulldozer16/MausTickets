@@ -287,11 +287,24 @@ router.get('/transactions', function(req, res, next) {
 });
 
 router.post('/transactions', function(req, res, next) {
+	var name = req.body.event;
+	var tickets = req.body.tickets;
+
+	var query = Event.update({'name':name}, 
+			{$inc: {'sold_tickets':tickets}}).exec();
+
 	var transaction = new Transaction(req.body);
 	transaction.save(function(err, transaction) {
 		if (err) { return next(err); }
     		res.json(transaction);
   	});
+
+	/*var query = Event.update({'name': event}, 
+     	{
+     		$inc: {
+       			'sold_tickets':tickets
+     		}
+	}).exec();*/
 });
 
 /* GET home page. */
