@@ -1,169 +1,193 @@
-<html>
-  <head>
-    <title>Registrarse a Maus Tickets</title>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
-    <script src="js/controller.js"></script>
-    <script src="js/toggle.js"></script>
-    <link href="css/settings.css" rel="stylesheet">
-  </head>
-  <body ng-app="flapperNews" ng-controller="RegisterCtrl" background="img/register.png">
-<form ng-submit="addUser()">
-<div class="row">
-  <div class="col-5" class="text"><input type="text" placeholder="Nombre de Usuario" ng-model="username" style="font-size:24px; height:50px"></input></div>
-  <div class="col-6" class="text"><input type="text" placeholder="Contrase&#241a" ng-model="password" style="font-size:24px; height:50px"></input></div>
-<div class="col-5" class="text"><input type="text" placeholder="Nombre" ng-model="name" style="font-size:24px; height:50px"></input></div>
-<div class="col-6" class="text">  <input type="text" placeholder="Apellidos" ng-model="lastname" style="font-size:24px; height:50px"></input></div>
-<div class="col-9" style="text-align: center" class="sex-group">
-  <label for="radio" class="sex-label">Sexo</label>
-  <div class="controls">
-									<div name="radio" class="radio">
-									  <label style="font-size:24px; height:50px"><input type="radio" name="sexo" value="1" required> Masculino</label>
-									</div>
-									<div class="radio">
-									  <label style="font-size:24px; height:50px"><input type="radio" name="sexo" value="0" required> Femenino</label>
-									</div></div></div></div>
-<div class="col-5" class="text"><input placeholder="N&#250mero de Tarjeta de Cr&#233dito" ng-model="creditnumber" style="font-size:24px; height:50px" type=text name=form_number size=20 maxlength=12 onkeypress='return isNumberKey(event)'></input></div>
-<div class="col-6" class="expiration-group">
-  <label for="expiration-month" class="expiration-label">Fecha de Vencimiento</label>
-  <div class="controlsExp">
-    <select name="expiration-month" id="expiration-month">
-      <option value="">Mes</option>
-      <option value="">-----</option>
-      <option value="01">Enero</option>
-      <option value="02">Febrero</option>
-      <option value="03">Marzo</option>
-      <option value="04">Abril</option>
-      <option value="05">Mayo</option>
-      <option value="06">Junio</option>
-      <option value="07">Julio</option>
-      <option value="08">Agosto</option>
-      <option value="09">Septiembre</option>
-      <option value="10">Octubre</option>
-      <option value="11">Noviembre</option>
-      <option value="12">Diciembre</option>
-    </select>
-    <select name="expiration-year" id="expiration-year">
-      <option value="">A&#241o</option>
-      <option value="">----</option>
-	<option value="2016">2016</option>
-	<option value="2017">2017</option>
-	<option value="2018">2018</option>
-	<option value="2019">2019</option>
-	<option value="2020">2020</option>
-	<option value="2021">2021</option>
-	<option value="2022">2022</option>
-	<option value="2023">2023</option>
-	<option value="2024">2024</option>
-	<option value="2025">2025</option>
-	<option value="2026">2026</option>
-	<option value="2027">2027</option>
-	<option value="2028">2028</option>
-	<option value="2029">2029</option>
-	<option value="2030">2030</option>	
-    </select>
-  </div>
-</div>
-  <br><div class="col-6" class="control-group">
-<label for="prov" class="prov-label">Lugar de Residencia</label><br>
-<select onChange="changePlace()" id="selectOpt1">
-      <option value="" selected="selected">Provincia</option>
-      <option value="">---</option>
-      <option value="Alajuela">Alajuela</option>
-      <option value="Heredia">Heredia</option>
-      <option value="San Jose">San Jose</option>
-      <option value="Cartago">Cartago</option>
-      <option value="Puntarenas">Puntarenas</option>
-      <option value="Guanacaste">Guanacaste</option>
-      <option value="Limon">Limon</option>
-</select>
-        <select id="selectOpt2">
-          <option value="">---</option>
-        </select>
-</div>
+<html ng-app="MausTickets">
+	<head>
+		<title>Registrarse a Mau's Tickets</title>
+    		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+    		<script src="js/controller.js"></script>
+    		<script src="js/toggle.js"></script>
+    		<link href="css/settings.css" rel="stylesheet">
+  	</head>
+  	<body ng-controller="register" background="img/register.png">
+		<form ng-submit="registrar()">
+			<div class="row">
+  				<div class="col-5" class="text">	
+					<input type="text" placeholder="Nombre de Usuario" ng-model="username" style="font-size:24px; height:50px"></input>
+				</div>
+  				<div class="col-6" class="text">
+					<input type="password" placeholder="Contrase&#241a" ng-model="password" style="font-size:24px; height:50px"></input>
+				</div>
+				<div class="col-5" class="text">
+					<input type="text" placeholder="Nombre" ng-model="name" style="font-size:24px; height:50px"></input>
+				</div>
+				<div class="col-6" class="text">  
+					<input type="text" placeholder="Apellidos" ng-model="last_name" style="font-size:24px; height:50px"></input>
+				</div>
+				<div class="col-9" style="text-align: center" class="sex-group">
+  					<label for="radio" class="sex-label">Sexo</label>
+  					<div class="controls">
+						<div name="radio" class="radio">
+							<label style="font-size:24px; height:50px">
+								<input type="radio" name="sexo" value="1" ng-model="genre" required> Masculino</input>
+							</label>
+						</div>
+						<div class="radio">
+					  		<label style="font-size:24px; height:50px">
+								<input type="radio" name="sexo" value="0" ng-model="genre" required> Femenino</input>
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
 
- <div class="col-6" class="control-group">
-  <label for="dob-age" class="control-label">Edad</label>
-  <div class="controls">
-    <select name="dob-age" id="dob-age">
-      <option value="">Edad</option>
-      <option value="">---</option>
-      <option value="01">01</option>
-      <option value="02">02</option>
-      <option value="03">03</option>
-      <option value="04">04</option>
-      <option value="05">05</option>
-      <option value="06">06</option>
-      <option value="07">07</option>
-      <option value="08">08</option>
-      <option value="09">09</option>
-      <option value="10">10</option>
-      <option value="11">11</option>
-      <option value="12">12</option>
-      <option value="13">13</option>
-      <option value="14">14</option>
-      <option value="15">15</option>
-      <option value="16">16</option>
-      <option value="17">17</option>
-      <option value="18">18</option>
-      <option value="19">19</option>
-      <option value="20">20</option>
-      <option value="21">21</option>
-      <option value="22">22</option>
-      <option value="23">23</option>
-      <option value="24">24</option>
-      <option value="25">25</option>
-      <option value="26">26</option>
-      <option value="27">27</option>
-      <option value="28">28</option>
-      <option value="29">29</option>
-      <option value="30">30</option>
-      <option value="31">31</option>
-<option value="32">32</option>
-      <option value="33">33</option>
-      <option value="34">34</option>
-      <option value="35">35</option>
-      <option value="36">36</option>
-      <option value="37">37</option>
-      <option value="38">38</option>
-      <option value="39">39</option>
-      <option value="40">40</option>
-      <option value="41">41</option>
-      <option value="42">42</option>
-      <option value="43">43</option>
-      <option value="44">44</option>
-      <option value="45">45</option>
-      <option value="46">46</option>
-      <option value="47">47</option>
-      <option value="48">48</option>
-      <option value="49">49</option>
-      <option value="50">50</option>
-      <option value="51">51</option>
-      <option value="52">52</option>
-      <option value="53">53</option>
-      <option value="54">54</option>
-      <option value="55">55</option>
-      <option value="56">56</option>
-      <option value="57">57</option>
-      <option value="58">58</option>
-      <option value="59">59</option>
-      <option value="60">60</option>
-      <option value="61">61</option>
-<option value="62">62</option>
-      <option value="63">63</option>
-      <option value="64">64</option>
-      <option value="65">65</option>
-      <option value="66">66</option>
-      <option value="67">67</option>
-      <option value="68">68</option>
-      <option value="69">69</option>
-      <option value="70">70</option>
-    </select>
-  </div>
-</div>
-  <p class="col-6" class="login button"> 
+			<div class="col-5" class="text">
+				<input placeholder="N&#250mero de Tarjeta de Cr&#233dito" ng-model="card_number" style="font-size:24px; height:50px" type=text name=form_number size=20 maxlength=12 onkeypress='return isNumberKey(event)'></input>
+			</div>
+			<div class="col-6" class="expiration-group">
+  				<label for="expiration-month" class="expiration-label">Fecha de Vencimiento</label>
+  				<div class="controlsExp">
+    					<select name="expiration-month" id="expiration-month" ng-model="expire_month">
+      						<option value="">Mes</option>
+      						<option value="">-----</option>
+      						<option value="01">Enero</option>
+      						<option value="02">Febrero</option>
+      						<option value="03">Marzo</option>
+      						<option value="04">Abril</option>
+      						<option value="05">Mayo</option>
+      						<option value="06">Junio</option>
+      						<option value="07">Julio</option>
+      						<option value="08">Agosto</option>
+      						<option value="09">Septiembre</option>
+      						<option value="10">Octubre</option>
+      						<option value="11">Noviembre</option>
+      						<option value="12">Diciembre</option>
+    					</select>
+    					<select name="expiration-year" id="expiration-year" ng-model="expire_year">
+      						<option value="">A&#241o</option>
+      						<option value="">----</option>
+						<option value="16">2016</option>
+						<option value="17">2017</option>
+						<option value="18">2018</option>
+						<option value="19">2019</option>
+						<option value="20">2020</option>
+						<option value="21">2021</option>
+						<option value="22">2022</option>
+						<option value="23">2023</option>
+						<option value="24">2024</option>
+						<option value="25">2025</option>
+						<option value="26">2026</option>
+						<option value="27">2027</option>
+						<option value="28">2028</option>
+						<option value="29">2029</option>
+						<option value="30">2030</option>	
+    					</select>
+  				</div>
+			</div>
+
+  			<br>
+			<div class="col-6" class="control-group">
+				<label for="prov" class="prov-label">Lugar de Residencia</label>
+				<br>
+				<select onChange="changePlace()" id="selectOpt1" ng-model="province">
+      					<option value="" selected="selected">Provincia</option>
+      					<option value="">---</option>
+      					<option value="Alajuela">Alajuela</option>
+      					<option value="Heredia">Heredia</option>
+      					<option value="San Jose">San Jose</option>
+      					<option value="Cartago">Cartago</option>
+      					<option value="Puntarenas">Puntarenas</option>
+      					<option value="Guanacaste">Guanacaste</option>
+      					<option value="Limon">Limon</option>
+				</select>
+        			<select id="selectOpt2" ng-model="canton">
+          				<option value="">---</option>
+        			</select>
+			</div>
+
+	 		<div class="col-6" class="control-group">
+  				<label for="dob-age" class="control-label">Edad</label>
+  				<div class="controls">
+    					<select name="dob-age" id="dob-age" ng-model="age">
+      						<option value="">Edad</option>
+						<option value="">---</option>
+					    	<option value="01">01</option>
+						<option value="02">02</option>
+				      		<option value="03">03</option>
+				   		<option value="04">04</option>
+					      	<option value="05">05</option>
+					      	<option value="06">06</option>
+					      	<option value="07">07</option>
+					      	<option value="08">08</option>
+					      	<option value="09">09</option>
+					      	<option value="10">10</option>
+				      		<option value="11">11</option>
+					      	<option value="12">12</option>
+					      	<option value="13">13</option>
+					      	<option value="14">14</option>
+					      	<option value="15">15</option>
+						<option value="16">16</option>
+					      	<option value="17">17</option>
+      						<option value="18">18</option>
+      						<option value="19">19</option>
+      						<option value="20">20</option>
+      						<option value="21">21</option>
+      						<option value="22">22</option>
+      						<option value="23">23</option>
+      						<option value="24">24</option>
+      						<option value="25">25</option>
+      						<option value="26">26</option>
+      						<option value="27">27</option>
+      						<option value="28">28</option>
+      						<option value="29">29</option>
+      						<option value="30">30</option>
+      						<option value="31">31</option>
+						<option value="32">32</option>
+      						<option value="33">33</option>
+      						<option value="34">34</option>
+      						<option value="35">35</option>
+      						<option value="36">36</option>
+      						<option value="37">37</option>
+      						<option value="38">38</option>
+      						<option value="39">39</option>
+      						<option value="40">40</option>
+      						<option value="41">41</option>
+      						<option value="42">42</option>
+      						<option value="43">43</option>
+      						<option value="44">44</option>
+      						<option value="45">45</option>
+      						<option value="46">46</option>
+      						<option value="47">47</option>
+      						<option value="48">48</option>
+      						<option value="49">49</option>
+      						<option value="50">50</option>
+					      	<option value="51">51</option>
+					      	<option value="52">52</option>
+					      	<option value="53">53</option>
+					      	<option value="54">54</option>
+					      	<option value="55">55</option>
+					      	<option value="56">56</option>
+					      	<option value="57">57</option>
+					      	<option value="58">58</option>
+					      	<option value="59">59</option>
+					      	<option value="60">60</option>
+					      	<option value="61">61</option>
+						<option value="62">62</option>
+      						<option value="63">63</option>
+      						<option value="64">64</option>
+      						<option value="65">65</option>
+      						<option value="66">66</option>
+      						<option value="67">67</option>
+      						<option value="68">68</option>
+      						<option value="69">69</option>
+      						<option value="70">70</option>
+    					</select>
+  				</div>
+			</div>
+  			<p class="col-6" class="login button"> 
+				<a href="start.html"></a>
 				<input type="submit" value="Registrarse" /> 
-				</p>
-				<p class="col-6"><a href="index.html" class="button">Volver</a></p>
-</form>
-  </body>
+			</p>
+			<p class="col-6">
+				<a href="index.html" class="button">Volver</a>
+			</p>
+		</form>
+  	</body>
 </html>

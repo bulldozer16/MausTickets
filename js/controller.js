@@ -108,4 +108,7 @@ app.controller("register", function($scope, $http) {
         	});
 	}
 });
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5fc618c97097ac15709c8bc1dba8642b25667a7a
