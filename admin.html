@@ -1,53 +1,75 @@
-<html>
-  <head>
-    <title>Administrar Maus Tickets</title>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
-    <script src="js/controller.js"></script>
-    <script src="js/toggle.js"></script>
-    <link href="css/settings.css" rel="stylesheet">
-  </head>
-  <body ng-app="MausTickets" ng-controller="eventCtrl" background="img/register.png">
-<form">
-<div class="row">
-  <div class="col-4" class="text"><input size=11 type="text" placeholder="Nombre de Evento" ng-model="eventname" style="font-size:24px; height:50px"></input></div>
-<div class="col-4" class="text"><input placeholder="Entradas Disponibles" ng-model="ticketsNumber" style="font-size:24px; height:50px" type=text name=form_number1 size=11 maxlength=7 onkeypress='return isNumberKey(event)'></input></div>
-<div class="col-3" class="text"><input placeholder="Precio (Colones)" ng-model="ticketsPrice" style="font-size:24px; height:50px" type=text name=form_number2 size=11 maxlength=7 onkeypress='return isNumberKey(event)'></input></div>
-<div class="row">
-<div> <textarea ng-model="description" class="col-12" rows="1" cols="50" placeholder="Descripcion del Evento">
-</textarea> </div></div>
-  
-</div>
-<div class="row">
-  <p class="col-12" ng-click="addEvent()" class="button"> 
-				<input type="submit"  value="Registrar Evento" /> 
-				</p></div>
-</form>
-<form ng-submit="editEvent()">
-<div class="row">
-<div class="col-2">
-<select style="font-size:24px; height:50px" onClick="loadEvents()" id="selectOpt1">
-      <option value="" selected="selected">Evento</option>
-      <option value="">---</option>
-</select></div>
-  <div class="col-3" class="text"><input size=11 type="text" placeholder="Editar Nombre de Evento" ng-model="eventnewname" style="font-size:24px; height:50px"></input></div>
-<div class="col-3" class="text"><input placeholder="Editar N&#176 Entradas" ng-model="tickersNewNumber" style="font-size:24px; height:50px" type=text name=form_number size=11 maxlength=7 onkeypress='return isNumberKey(event)'></input></div>
-<div class="col-2" class="text"><input placeholder="Editar Precio" ng-model="ticketsNewPrice" style="font-size:24px; height:50px" type=text name=form_number2 size=11 maxlength=7 onkeypress='return isNumberKey(event)'></input></div>
-<div class="row">
-<div> <textarea ng-model="newdescription" class="col-12" rows="1" cols="50" placeholder="Editar Descripcion del Evento">
-</textarea> </div></div>
-  
-</div>
-  <p class="col-12" ng-click="editEvent()" class="button"> 
-				<input type="submit" value="Editar Evento" /> 
+<html ng-app="MausTickets">
+	<head>
+		<title>Administrar Mau's Tickets</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+		<script src="js/controller.js"></script>
+    		<script src="js/toggle.js"></script>
+    		<link href="css/settings.css" rel="stylesheet">
+  	</head>
+  	<body background="img/register.png">
+		<form ng-controller="eventCtrl">
+			<div class="row">
+  				<div class="col-4" class="text">
+					<input size=11 type="text" placeholder="Nombre de Evento" ng-model="eventname" style="font-size:24px; height:50px"></input>
+				</div>
+				<div class="col-4" class="text">
+					<input placeholder="Entradas Disponibles" ng-model="ticketsNumber" style="font-size:24px; height:50px" type=text name=form_number1 size=11 maxlength=7 onkeypress='return isNumberKey(event)'></input>
+				</div>
+				<div class="col-3" class="text">
+					<input placeholder="Precio (Colones)" ng-model="ticketsPrice" style="font-size:24px; height:50px" type=text name=form_number2 size=11 maxlength=7 onkeypress='return isNumberKey(event)'></input>
+				</div>
+				<div class="row">
+					<div>
+						<textarea ng-model="description" class="col-12" rows="1" cols="50" placeholder="Descripcion del Evento"></textarea>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+  				<p class="col-12" ng-click="addEvent()" class="button"> 
+					<input type="submit"  value="Registrar Evento" /> 
 				</p>
-</form>
-<div class="panel panel-default">
-				<div class="panel-body"><div style="text-align: center">
-
-				
-				<p class="col-12"><a href="consults.html" class="button">Consultas</a></p>
-				<p class="col-12"><a href="index.html" class="button">Salir</a></p>
-
-</div>
-  </body>
+			</div>
+		</form>
+		<form ng-submit="actualizar()" ng-controller="editar_evento">
+			<div class="row">
+				<div class="col-2">
+					<!--<select style="font-size:24px; height:50px" onClick="loadEvents()" id="selectOpt1">-->
+					<select onClick="loadEvents()" id="selectOpt1" ng-model="selected_event">
+      						<option selected="selected">Evento</option>
+      						<option value="">---</option>
+						<option ng-repeat="e in events" ng-click="set_shit(e)">{{e.name}}</option>
+					</select>
+				</div>
+  				<div class="col-3" class="text">
+					<input size=11 type="text" placeholder="{{nombre}}" ng-model="nombre" style="font-size:24px; height:50px"></input>
+				</div>
+				<div class="col-3" class="text">
+					<input placeholder="{{entradas}}" ng-model="entradas" style="font-size:24px; height:50px" type=text name=form_number size=11 maxlength=7 onkeypress='return isNumberKey(event)'></input>
+				</div>
+				<div class="col-2" class="text">
+					<input placeholder="{{precio}}" ng-model="precio" style="font-size:24px; height:50px" type=text name=form_number2 size=11 maxlength=7 onkeypress='return isNumberKey(event)'></input>
+				</div>
+				<div class="row">
+					<div> 
+						<textarea ng-model="descripcion" class="col-12" rows="1" cols="50" placeholder="{{descripcion}}"></textarea> 
+					</div>
+				</div>
+			</div>
+  			<p class="col-12" class="button"> 
+				<input type="submit" value="Editar Evento" /> 
+			</p>
+		</form>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div style="text-align: center">
+					<p class="col-12">
+						<a href="consults.html" class="button">Consultas</a>
+					</p>
+					<p class="col-12">
+						<a href="index.html" class="button">Salir</a>
+					</p>
+				</div>
+			</div>
+		</div>
+  	</body>
 </html>
