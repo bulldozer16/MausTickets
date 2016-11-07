@@ -34,6 +34,50 @@ app.controller("eventCtrl", function($scope, $http) {
 	}
 });
 
+app.controller("editar_evento", function($scope, $http) {
+	$scope.events = [];
+	$scope.nombre = "Editar nombre";
+	$scope.entradas = "Agregar entradas";
+	$scope.precio = "Editar precio";
+	$scope.descripcion = "Editar descripcion";
+	$scope.entradas_previas = 0;	
+	$scope.vendidos = 0;
+
+	$http.get("http://192.168.100.21:3000/events")
+    	.success(function(data){         
+        	$scope.events = data;
+		console.log(data);
+    	})
+    	.error(function(err){
+    	});
+
+	$scope.set_shit = function(event) {
+		$scope.nombre = event.name;
+		$scope.entradas = event.available_tickets;
+		$scope.entradas_previas = $scope.entradas;
+		$scope.precio = event.ticket_price;
+		$scope.descripcion = event.description;
+		$scope.vendidos = event.sold_tickets;
+	}
+
+	$scope.actualizar = function() {
+		$http.post("http://192.168.100.21:3000/events/update", {
+			name: $scope.nombre,
+			available_tickets: $scope.entradas,
+			sold_tickets: $scope.vendidos,
+			ticket_price: $scope.precio,
+			description: $scope.descripcion
+		})
+		.success(function (data, status, headers, config) {
+			console.log(data);
+			window.alert("Evento actualizado");
+		})
+		.error(function (data, status, headers, config) {
+	    		window.alert("Error");
+		});
+	}
+});
+
 app.controller("loginCtrl", function($scope, $http) {
 	$scope.username = "";
 	$scope.password = "";

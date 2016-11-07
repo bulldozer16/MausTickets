@@ -117,10 +117,10 @@ router.post('/events', function(req, res, next) {
   	});
 });
 
-router.put('/events', function(req, res, next) {
+router.post('/events/update', function(req, res, next) {
 	var query = Event.update({'name':req.body.name}, 
 			{$set: {'name':req.body.name,
-				'province':req.body.province,
+				'province':"",
 				'available_tickets':req.body.available_tickets,
 				'description':req.body.description,
 				'sold_tickets':req.body.sold_tickets,
