@@ -1,6 +1,70 @@
 var app = angular.module("MausTickets", []);
 
+app.controller("compra", function($scope, $http) {
+	$scope.events = [];
+	$scope.selected_event = "";
+	$scope.descripcion = "";
+	$scope.entradas_disponibles = "";
+	$scope.precio_total = 0;
+	$scope.precio = "";
+	$scope.cantidad_entradas = "";
+	$scope.username = localStorage.getItem('username');
+	$scope.genre = "";
+	$scope.province = "";
 
+	$http.get("http://192.168.100.21:3000/events")
+    	.success(function(data){         
+        	$scope.events = data;
+		console.log(data);
+    	})
+    	.error(function(err){
+    	});
+
+	$http.get("http://192.168.100.21:3000/users/" + $scope.username)
+    	.success(function(data){         
+        	$scope.genre = data[0].genre;
+		$scope.province = data[0].province;
+		console.log(data);
+    	})
+    	.error(function(err){
+    	});
+
+	$scope.set_shit = function(event) {
+		$scope.descripcion = event.description;
+		$scope.entradas_disponibles = event.available_tickets - event.sold_tickets;
+		$scope.precio = event.ticket_price;
+	}
+
+	$scope.set_price = function() {
+		$scope.precio_total = $scope.cantidad_entradas * $scope.precio;
+	}
+
+	$scope.comprar = function() {
+		$http.post("http://192.168.100.21:3000/transactions", {
+            		username: $scope.username,
+			genre: $scope.genre,
+			province: $scope.province,
+			event: $scope.selected_event,
+			ticket_price: $scope.precio,
+			tickets: $scope.cantidad_entradas
+        	})
+        	.success(function (data, status, headers, config) {
+			console.log(data);
+            		window.alert("Compra exitosa");
+        	})
+        	.error(function (data, status, headers, config) {
+            		console.log(error);
+        	});
+
+		$http.get("http://192.168.100.21:3000/events")
+    		.success(function(data){         
+        		$scope.events = data;
+			console.log(data);
+    		})
+    		.error(function(err){
+    		});
+	}
+});
 
 app.controller("eventCtrl", function($scope, $http) {
 	$scope.eventname = "";
@@ -86,7 +150,7 @@ app.controller("loginCtrl", function($scope, $http) {
 	$scope.ingreso = function () {
 		usuario = $scope.user;
 		if ($scope.user && $scope.pass){
-			$http.post("http://192.168.100.21:3000/users/login", {
+			$http.post("http://192.168.100.12:3000/users/login", {
 		    		username: $scope.user,
 				password: $scope.pass
 			})
@@ -227,7 +291,7 @@ app.controller("profile", function($scope, $http) {
 		    var expire = $scope.expire_month + "/" + $scope.expire_year;
 		else		
 		    var expire = $scope.labelDate;
-		console.log($scope.canton, $scope.labelCant);
+		console.log($scope.expire_month, $scope.expire_year);
 		if ($scope.canton != $scope.labelCant)
 		    var lugar = $scope.canton;
 		else		
