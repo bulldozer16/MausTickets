@@ -55,36 +55,6 @@ app.controller("compra", function($scope, $http) {
         	.error(function (data, status, headers, config) {
             		console.log(error);
         	});
-		$http.post("http://192.168.100.9:3000/transactions", {
-            		username: $scope.username,
-			genre: $scope.genre,
-			province: $scope.province,
-			event: $scope.selected_event,
-			ticket_price: $scope.precio,
-			tickets: $scope.cantidad_entradas
-        	})
-        	.success(function (data, status, headers, config) {
-			console.log(data);
-            		//window.alert("Compra exitosa");
-        	})
-        	.error(function (data, status, headers, config) {
-            		console.log(error);
-        	});
-		$http.post("http://192.168.100.12:3000/transactions", {
-            		username: $scope.username,
-			genre: $scope.genre,
-			province: $scope.province,
-			event: $scope.selected_event,
-			ticket_price: $scope.precio,
-			tickets: $scope.cantidad_entradas
-        	})
-        	.success(function (data, status, headers, config) {
-			console.log(data);
-            		//window.alert("Compra exitosa");
-        	})
-        	.error(function (data, status, headers, config) {
-            		console.log(error);
-        	});
 
 		$http.get("http://192.168.100.21:3000/events")
     		.success(function(data){         
@@ -106,7 +76,7 @@ app.controller("eventCtrl", function($scope, $http) {
 
 	$scope.addEvent = function () {
 		if ($scope.eventname && $scope.ticketsNumber && $scope.description && $scope.ticketsPrice){
-			//console.log("I AM HERE");
+			console.log("I AM HERE");
 			$http.post("http://192.168.100.21:3000/events", {
 		    		name: $scope.eventname,
 				province: "",
@@ -120,34 +90,6 @@ app.controller("eventCtrl", function($scope, $http) {
 			})
 			.error(function (data, status, headers, config) {
 		    		window.alert("No se pudo ingresar el evento");
-			});
-			$http.post("http://192.168.100.12:3000/events", {
-		    		name: $scope.eventname,
-				province: "",
-				available_tickets: $scope.ticketsNumber,
-				description: $scope.description,
-				sold_tickets: 0,
-				ticket_price: $scope.ticketsPrice
-			})
-			.success(function (data, status, headers, config) {
-				console.log(data.description);        
-			})
-			.error(function (data, status, headers, config) {
-		    		//window.alert("No se pudo ingresar el evento");
-			});
-			$http.post("http://192.168.100.9:3000/events", {
-		    		name: $scope.eventname,
-				province: "",
-				available_tickets: $scope.ticketsNumber,
-				description: $scope.description,
-				sold_tickets: 0,
-				ticket_price: $scope.ticketsPrice
-			})
-			.success(function (data, status, headers, config) {
-				console.log(data.description);        
-			})
-			.error(function (data, status, headers, config) {
-		    		//window.alert("No se pudo ingresar el evento");
 			});
 		}
 		else{
@@ -196,34 +138,6 @@ app.controller("editar_evento", function($scope, $http) {
 		})
 		.error(function (data, status, headers, config) {
 	    		window.alert("Error");
-		});
-		$http.post("http://192.168.100.12:3000/events/update", {
-			name: $scope.nombre,
-			available_tickets: $scope.entradas,
-			sold_tickets: $scope.vendidos,
-			ticket_price: $scope.precio,
-			description: $scope.descripcion
-		})
-		.success(function (data, status, headers, config) {
-			console.log(data);
-			//window.alert("Evento actualizado");
-		})
-		.error(function (data, status, headers, config) {
-	    		//window.alert("Error");
-		});
-		$http.post("http://192.168.100.9:3000/events/update", {
-			name: $scope.nombre,
-			available_tickets: $scope.entradas,
-			sold_tickets: $scope.vendidos,
-			ticket_price: $scope.precio,
-			description: $scope.descripcion
-		})
-		.success(function (data, status, headers, config) {
-			console.log(data);
-			//window.alert("Evento actualizado");
-		})
-		.error(function (data, status, headers, config) {
-	    		//window.alert("Error");
 		});
 	}
 });
@@ -310,54 +224,6 @@ app.controller("register", function($scope, $http) {
             		console.log(error);
 			window.alert("Error");
         	});
-		$http.post("http://192.168.100.12:3000/users", {
-            		type: "User",
-			username: $scope.username,
-			password: $scope.password,
-			name: $scope.name,
-			last_name: $scope.last_name,
-			genre: $scope.genre,
-			province: $scope.province,
-			canton: $scope.canton,
-			card_number: $scope.card_number,
-			expire_date: expire,
-			age: $scope.age,
-			artists: $scope.bands,
-			teams: $scope.teams,
-			picture: ""
-        	})
-        	.success(function (data, status, headers, config) {
-			console.log(data);
-			//window.alert("Usuario registrado");
-        	})
-        	.error(function (data, status, headers, config) {
-            		console.log(error);
-			//window.alert("Error");
-        	});
-		$http.post("http://192.168.100.9:3000/users", {
-            		type: "User",
-			username: $scope.username,
-			password: $scope.password,
-			name: $scope.name,
-			last_name: $scope.last_name,
-			genre: $scope.genre,
-			province: $scope.province,
-			canton: $scope.canton,
-			card_number: $scope.card_number,
-			expire_date: expire,
-			age: $scope.age,
-			artists: $scope.bands,
-			teams: $scope.teams,
-			picture: ""
-        	})
-        	.success(function (data, status, headers, config) {
-			console.log(data);
-			//window.alert("Usuario registrado");
-        	})
-        	.error(function (data, status, headers, config) {
-            		console.log(error);
-			//window.alert("Error");
-        	});
 	}
 });
 
@@ -382,6 +248,7 @@ app.controller("profile", function($scope, $http) {
 
 	$http.get("http://192.168.100.21:3000/users/"+ usuario)
         	.success(function (data, status, headers, config) { 
+			console.log("AQUI");
 			$scope.password = data[0].password;
 			$scope.name = data[0].name;
 			$scope.last_name = data[0].last_name;
@@ -405,6 +272,7 @@ app.controller("profile", function($scope, $http) {
 			else
 				document.getElementById("m").checked = true;
 			document.getElementById("selectOpt1").value = data[0].province;
+			//document.getElementById("labelCanton").value = data[0].canton;
 			$scope.labelCant = data[0].canton;
 			$scope.labelDate = data[0].expire_date;
 			document.getElementById("dob-age").value = data[0].age;
@@ -451,52 +319,6 @@ app.controller("profile", function($scope, $http) {
 		})
 		.error(function (data, status, headers, config) {
 	    		window.alert("Error");
-		});
-		$http.post("http://192.168.100.9:3000/users/update", {
-			type: "User",
-			username: $scope.username,
-			password: $scope.password,
-			name: $scope.name,
-			last_name: $scope.last_name,
-			genre: $scope.genre,
-			province: $scope.province,
-			canton: lugar,
-			card_number: $scope.card_number,
-			expire_date: expire,
-			age: $scope.age,
-			artists: $scope.bands,
-			teams: $scope.teams,
-			picture: ""
-		})
-		.success(function (data, status, headers, config) {
-			console.log(data);
-			//window.alert("Usuario actualizado");
-		})
-		.error(function (data, status, headers, config) {
-	    		//window.alert("Error");
-		});
-		$http.post("http://192.168.100.12:3000/users/update", {
-			type: "User",
-			username: $scope.username,
-			password: $scope.password,
-			name: $scope.name,
-			last_name: $scope.last_name,
-			genre: $scope.genre,
-			province: $scope.province,
-			canton: lugar,
-			card_number: $scope.card_number,
-			expire_date: expire,
-			age: $scope.age,
-			artists: $scope.bands,
-			teams: $scope.teams,
-			picture: ""
-		})
-		.success(function (data, status, headers, config) {
-			console.log(data);
-			//window.alert("Usuario actualizado");
-		})
-		.error(function (data, status, headers, config) {
-	    		//window.alert("Error");
 		});
 	}
 });
