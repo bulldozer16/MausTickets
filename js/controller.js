@@ -12,7 +12,7 @@ app.controller("compra", function($scope, $http) {
 	$scope.genre = "";
 	$scope.province = "";
 
-	$http.get("http://192.168.100.21:3000/events")
+	$http.get("http://192.168.43.228:3000/events")
     	.success(function(data){         
         	$scope.events = data;
 		console.log(data);
@@ -20,7 +20,7 @@ app.controller("compra", function($scope, $http) {
     	.error(function(err){
     	});
 
-	$http.get("http://192.168.100.21:3000/users/" + $scope.username)
+	$http.get("http://192.168.43.228:3000/users/" + $scope.username)
     	.success(function(data){         
         	$scope.genre = data[0].genre;
 		$scope.province = data[0].province;
@@ -40,7 +40,7 @@ app.controller("compra", function($scope, $http) {
 	}
 
 	$scope.comprar = function() {
-		$http.post("http://192.168.100.21:3000/transactions", {
+		$http.post("http://192.168.43.228:3000/transactions", {
             		username: $scope.username,
 			genre: $scope.genre,
 			province: $scope.province,
@@ -55,7 +55,7 @@ app.controller("compra", function($scope, $http) {
         	.error(function (data, status, headers, config) {
             		console.log(error);
         	});
-		$http.post("http://192.168.100.9:3000/transactions", {
+		$http.post("http://192.168.43.45:3000/transactions", {
             		username: $scope.username,
 			genre: $scope.genre,
 			province: $scope.province,
@@ -70,7 +70,7 @@ app.controller("compra", function($scope, $http) {
         	.error(function (data, status, headers, config) {
             		console.log(error);
         	});
-		$http.post("http://192.168.100.12:3000/transactions", {
+		$http.post("http://192.168.43.182:3000/transactions", {
             		username: $scope.username,
 			genre: $scope.genre,
 			province: $scope.province,
@@ -86,7 +86,7 @@ app.controller("compra", function($scope, $http) {
             		console.log(error);
         	});
 
-		$http.get("http://192.168.100.21:3000/events")
+		$http.get("http://192.168.43.228:3000/events")
     		.success(function(data){         
         		$scope.events = data;
 			console.log(data);
@@ -107,7 +107,7 @@ app.controller("eventCtrl", function($scope, $http) {
 	$scope.addEvent = function () {
 		if ($scope.eventname && $scope.ticketsNumber && $scope.description && $scope.ticketsPrice){
 			//console.log("I AM HERE");
-			$http.post("http://192.168.100.21:3000/events", {
+			$http.post("http://192.168.43.228:3000/events", {
 		    		name: $scope.eventname,
 				province: "",
 				available_tickets: $scope.ticketsNumber,
@@ -121,7 +121,7 @@ app.controller("eventCtrl", function($scope, $http) {
 			.error(function (data, status, headers, config) {
 		    		window.alert("No se pudo ingresar el evento");
 			});
-			$http.post("http://192.168.100.12:3000/events", {
+			$http.post("http://192.168.43.45:3000/events", {
 		    		name: $scope.eventname,
 				province: "",
 				available_tickets: $scope.ticketsNumber,
@@ -135,7 +135,7 @@ app.controller("eventCtrl", function($scope, $http) {
 			.error(function (data, status, headers, config) {
 		    		//window.alert("No se pudo ingresar el evento");
 			});
-			$http.post("http://192.168.100.9:3000/events", {
+			$http.post("http://192.168.43.182:3000/events", {
 		    		name: $scope.eventname,
 				province: "",
 				available_tickets: $scope.ticketsNumber,
@@ -165,7 +165,7 @@ app.controller("editar_evento", function($scope, $http) {
 	$scope.entradas_previas = 0;	
 	$scope.vendidos = 0;
 
-	$http.get("http://192.168.100.21:3000/events")
+	$http.get("http://192.168.43.228:3000/events")
     	.success(function(data){         
         	$scope.events = data;
 		console.log(data);
@@ -183,7 +183,7 @@ app.controller("editar_evento", function($scope, $http) {
 	}
 
 	$scope.actualizar = function() {
-		$http.post("http://192.168.100.21:3000/events/update", {
+		$http.post("http://192.168.43.228:3000/events/update", {
 			name: $scope.nombre,
 			available_tickets: $scope.entradas,
 			sold_tickets: $scope.vendidos,
@@ -197,7 +197,7 @@ app.controller("editar_evento", function($scope, $http) {
 		.error(function (data, status, headers, config) {
 	    		window.alert("Error");
 		});
-		$http.post("http://192.168.100.12:3000/events/update", {
+		$http.post("http://192.168.43.45:3000/events/update", {
 			name: $scope.nombre,
 			available_tickets: $scope.entradas,
 			sold_tickets: $scope.vendidos,
@@ -211,7 +211,7 @@ app.controller("editar_evento", function($scope, $http) {
 		.error(function (data, status, headers, config) {
 	    		//window.alert("Error");
 		});
-		$http.post("http://192.168.100.9:3000/events/update", {
+		$http.post("http://192.168.43.182:3000/events/update", {
 			name: $scope.nombre,
 			available_tickets: $scope.entradas,
 			sold_tickets: $scope.vendidos,
@@ -236,7 +236,7 @@ app.controller("loginCtrl", function($scope, $http) {
 	$scope.ingreso = function () {
 		usuario = $scope.user;
 		if ($scope.user && $scope.pass){
-			$http.post("http://192.168.100.21:3000/users/login", {
+			$http.post("http://192.168.43.228:3000/users/login", {
 		    		username: $scope.user,
 				password: $scope.pass
 			})
@@ -286,7 +286,7 @@ app.controller("register", function($scope, $http) {
 	
 		var expire = $scope.expire_month + "/" + $scope.expire_year;
 
-		$http.post("http://192.168.100.21:3000/users", {
+		$http.post("http://192.168.43.228:3000/users", {
             		type: "User",
 			username: $scope.username,
 			password: $scope.password,
@@ -310,7 +310,7 @@ app.controller("register", function($scope, $http) {
             		console.log(error);
 			window.alert("Error");
         	});
-		$http.post("http://192.168.100.12:3000/users", {
+		$http.post("http://192.168.43.45:3000/users", {
             		type: "User",
 			username: $scope.username,
 			password: $scope.password,
@@ -334,7 +334,7 @@ app.controller("register", function($scope, $http) {
             		console.log(error);
 			//window.alert("Error");
         	});
-		$http.post("http://192.168.100.9:3000/users", {
+		$http.post("http://192.168.43.182:3000/users", {
             		type: "User",
 			username: $scope.username,
 			password: $scope.password,
@@ -380,7 +380,7 @@ app.controller("profile", function($scope, $http) {
 	$scope.teams = "";
 	$scope.picture = "";
 
-	$http.get("http://192.168.100.21:3000/users/"+ usuario)
+	$http.get("http://192.168.43.228:3000/users/"+ usuario)
         	.success(function (data, status, headers, config) { 
 			$scope.password = data[0].password;
 			$scope.name = data[0].name;
@@ -429,7 +429,7 @@ app.controller("profile", function($scope, $http) {
 		else		
 		    var lugar = $scope.labelCant;
 		console.log(lugar, expire, $scope.genre, $scope.username, $scope.password, $scope.name, $scope.last_name, $scope.province, $scope.card_number,$scope.age, $scope.bands, $scope.teams);
-		$http.post("http://192.168.100.21:3000/users/update", {
+		$http.post("http://192.168.43.228:3000/users/update", {
 			type: "User",
 			username: $scope.username,
 			password: $scope.password,
@@ -452,7 +452,7 @@ app.controller("profile", function($scope, $http) {
 		.error(function (data, status, headers, config) {
 	    		window.alert("Error");
 		});
-		$http.post("http://192.168.100.9:3000/users/update", {
+		$http.post("http://192.168.43.45:3000/users/update", {
 			type: "User",
 			username: $scope.username,
 			password: $scope.password,
@@ -475,7 +475,7 @@ app.controller("profile", function($scope, $http) {
 		.error(function (data, status, headers, config) {
 	    		//window.alert("Error");
 		});
-		$http.post("http://192.168.100.12:3000/users/update", {
+		$http.post("http://192.168.43.182:3000/users/update", {
 			type: "User",
 			username: $scope.username,
 			password: $scope.password,
